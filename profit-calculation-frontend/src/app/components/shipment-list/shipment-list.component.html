@@ -1,0 +1,27 @@
+<div class="container">
+  <h4>Shipments</h4>
+
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="!loading && shipments.length === 0">No shipments yet</div>
+
+  <div *ngIf="shipments.length > 0" class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Ref</th>
+          <th>Income</th>
+          <th>Total Costs</th>
+          <th>Profit/Loss</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of shipments">
+          <td>{{ s.referenceNumber || s.id }}</td>
+          <td>{{ s.customers?.reduce((acc, c) => acc + (c.paymentAmount || 0), 0) }}</td>
+          <td>{{ s.serviceProv?.reduce((acc, c) => acc + (c.costAmount || 0), 0) }}</td>
+          <td>{{ s.profitOrLoss }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

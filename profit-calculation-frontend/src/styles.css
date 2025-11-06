@@ -1,0 +1,28 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+/* small app styles */
+body {
+  padding: 12px;
+  background: #f7f7f9;
+}
+
+.app-shell {
+  max-width: 1100px;
+  margin: 12px auto;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+.left-panel {
+  background: #0d6efd;
+  color: white;
+  min-height: 100vh;
+  padding: 18px;
+}
+.left-panel h3 { font-weight: 600; }
+.content {
+  padding: 18px;
+}
+.table-fixed { max-height: 220px; overflow-y: auto; display:block; }
+.table-fixed table { width:100%; }
