@@ -1,26 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
-import { Shipment } from '../../models/shipment';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-shipment-list',
   templateUrl: './shipment-list.component.html'
 })
-export class ShipmentListComponent implements OnInit {
-  shipments: Shipment[] = [];
-  loading = false;
+export class ShipmentListComponent {
+  @Input() shipments: any[] = [];
 
-  constructor(private api: ApiService) {}
-
-  ngOnInit(): void {
-    this.load();
+  // Optional helper methods for use in template
+  getTotalPayments(shipment: any): number {
+    return shipment?.customers?.reduce(
+      (acc: number, c: any) => acc + (Number(c.paymentAmount) || 0),
+      0
+    ) || 0;
   }
 
-  load() {
-    this.loading = true;
-    this.api.getShipments().subscribe({
-      next: s => { this.shipments = s; this.loading = false; },
-      error: _ => { this.loading = false; }
-    });
+  getTotalCosts(shipment: any): number {
+    return shipment?.serviceProv?.reduce(
+      (acc: number, s: any) => acc + (Number(s.costAmount) || 0),
+      0
+    ) || 0;
+  }
+
+  getProfit(shipment: any): number {
+    return this.getTotalPayments(shipment) - this.getTotalCosts(shipment);
   }
 }

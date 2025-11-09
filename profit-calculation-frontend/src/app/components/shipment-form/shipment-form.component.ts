@@ -1,71 +1,65 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ApiService } from '../../services/api.service';
-import { Shipment } from '../../models/shipment';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-shipment-form',
-  templateUrl: './shipment-form.component.html',
-  styleUrls: ['./shipment-form.component.css']
+  templateUrl: './shipment-form.component.html'
 })
-export class ShipmentFormComponent implements OnInit {
+export class ShipmentFormComponent {
   form: FormGroup;
-  result?: Shipment;
-  constructor(private fb: FormBuilder, private api: ApiService) {
+  result: any = null;
+
+  constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      referenceNumber: ['SHIP-0001', Validators.required],
+      referenceNumber: ['', Validators.required],
       customers: this.fb.array([]),
-      services: this.fb.array([])
+      serviceProv: this.fb.array([])
     });
   }
 
-  ngOnInit(): void {
-    // prefill one customer and one service for demo
-    this.addCustomer();
-    this.addService();
-  }
-
-  get customers() {
+  get customers(): FormArray {
     return this.form.get('customers') as FormArray;
   }
-  get services() {
-    return this.form.get('services') as FormArray;
+
+  get serviceProv(): FormArray {
+    return this.form.get('serviceProv') as FormArray;
   }
 
   addCustomer() {
     this.customers.push(this.fb.group({
-      name: ['Customer', Validators.required],
-      paymentAmount: [0, Validators.required]
+      name: [''],
+      paymentAmount: [0]
     }));
   }
 
-  removeCustomer(index: number) { this.customers.removeAt(index); }
-
-  addService() {
-    this.services.push(this.fb.group({
-      description: ['Cost', Validators.required],
-      costAmount: [0, Validators.required]
+  addServiceProvider() {
+    this.serviceProv.push(this.fb.group({
+      name: [''],
+      costAmount: [0]
     }));
   }
 
-  removeService(index: number) { this.services.removeAt(index); }
-
-  calculate() {
-    const payload: Shipment = {
-      referenceNumber: this.form.value.referenceNumber,
-      customers: this.form.value.customers,
-      serviceProv: this.form.value.services
-    };
-    this.api.calculate(payload).subscribe({
-      next: res => {
-        this.result = res;
-      },
-      error: err => {
-        console.error(err);
-        alert('Calculation failed. See console.');
-      }
-    });
+  onSubmit() {
+    this.result = this.form.value;
   }
 
-  resetResult() { this.result = undefined; }
+
+  getTotalPayments(): number {
+    return this.result?.customers?.reduce(
+      (total: number, c: any) => total + (Number(c.paymentAmount) || 0),
+      0
+    ) || 0;
+  }
+
+  getTotalCosts(): number {
+    return this.result?.serviceProv?.reduce(
+      (total: number, s: any) => total + (Number(s.costAmount) || 0),
+      0
+    ) || 0;
+  }
+
+  getProfit(): number {
+    return this.getTotalPayments() - this.getTotalCosts();
+  }
 }
+
