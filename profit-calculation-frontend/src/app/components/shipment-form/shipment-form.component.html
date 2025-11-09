@@ -1,66 +1,42 @@
-<div class="shipment-form">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-    <div class="mb-3">
-      <label>Reference Number</label>
-      <input
-        class="form-control"
-        formControlName="referenceNumber"
-        [formControl]="form.get('referenceNumber') as FormControl" />
-    </div>
-
-    <div formArrayName="customers">
-      <h4>Customers</h4>
-      <div *ngFor="let c of customers.controls; let i = index" [formGroupName]="i" class="mb-3">
-        <input
-          class="form-control mb-1"
-          placeholder="Customer name"
-          [formControl]="c.get('name') as FormControl" />
-        <input
-          type="number"
-          class="form-control"
-          placeholder="Payment"
-          [formControl]="c.get('paymentAmount') as FormControl" />
-      </div>
-      <button type="button" class="btn btn-secondary mt-2" (click)="addCustomer()">Add Customer</button>
-    </div>
-
-    <div formArrayName="serviceProv" class="mt-4">
-      <h4>Service Providers</h4>
-      <div *ngFor="let s of serviceProv.controls; let j = index" [formGroupName]="j" class="mb-3">
-        <input
-          class="form-control mb-1"
-          placeholder="Service description"
-          [formControl]="s.get('description') as FormControl" />
-        <input
-          type="number"
-          class="form-control"
-          placeholder="Cost"
-          [formControl]="s.get('costAmount') as FormControl" />
-      </div>
-      <button type="button" class="btn btn-secondary mt-2" (click)="addService()">Add Service</button>
-    </div>
-
-    <button type="submit" class="btn btn-primary mt-4">Submit</button>
-  </form>
-
-  <div *ngIf="result" class="mt-4">
-    <h4>Result</h4>
-    <p>
-      <strong>Total Income:</strong>
-      {{ result.customers?.reduce((sum, c) => sum + (c.paymentAmount || 0), 0) }}
-    </p>
-    <p>
-      <strong>Total Costs:</strong>
-      {{ result.serviceProv?.reduce((sum, s) => sum + (s.costAmount || 0), 0) }}
-    </p>
-    <p>
-      <strong>Profit:</strong>
-      {{
-        (result.customers?.reduce((sum, c) => sum + (c.paymentAmount || 0), 0) || 0)
-        -
-        (result.serviceProv?.reduce((sum, s) => sum + (s.costAmount || 0), 0) || 0)
-      }}
-    </p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label>Reference Number</label>
+    <input class="form-control" formControlName="referenceNumber" />
   </div>
+
+  <h5>Customers</h5>
+  <div formArrayName="customers">
+    <div *ngFor="let c of customers.controls; let i = index" [formGroupName]="i" class="mb-3">
+      <input class="form-control mb-2" placeholder="Customer name" formControlName="name" />
+      <input class="form-control" type="number" placeholder="Payment amount" formControlName="paymentAmount" />
+    </div>
+  </div>
+  <button type="button" class="btn btn-sm btn-secondary mb-3" (click)="addCustomer()">Add Customer</button>
+
+  <h5>Service Providers</h5>
+  <div formArrayName="serviceProv">
+    <div *ngFor="let s of serviceProv.controls; let j = index" [formGroupName]="j" class="mb-3">
+      <input class="form-control mb-2" placeholder="Service description" formControlName="description" />
+      <input class="form-control" type="number" placeholder="Cost amount" formControlName="costAmount" />
+    </div>
+  </div>
+  <button type="button" class="btn btn-sm btn-secondary mb-3" (click)="addService()">Add Service</button>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!-- Result Display -->
+<div *ngIf="result" class="mt-4">
+  <h5>Summary</h5>
+  <p><strong>Reference:</strong> {{ result.referenceNumber }}</p>
+  <p><strong>Total Payments:</strong> {{
+    result.customers?.reduce((total, c) => total + (c.paymentAmount || 0), 0)
+  }}</p>
+  <p><strong>Total Costs:</strong> {{
+    result.serviceProv?.reduce((total, s) => total + (s.costAmount || 0), 0)
+  }}</p>
+  <p><strong>Profit:</strong> {{
+    (result.customers?.reduce((total, c) => total + (c.paymentAmount || 0), 0) || 0)
+      - (result.serviceProv?.reduce((total, s) => total + (s.costAmount || 0), 0) || 0)
+  }}</p>
 </div>
