@@ -1,3 +1,6 @@
-.list-wrapper { padding: 8px; }
-.list-table { width: 100%; border-collapse: collapse; }
-.list-table th, .list-table td { border: 1px solid #999; padding: 8px; text-align:left; }
+.result-table { margin: 18px 8px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #bbb; padding: 14px; text-align: left; }
+th { background: #efefef; font-weight:700; }
+.profit { color: #0a7a07; }
+.loss { color: #b30000; }

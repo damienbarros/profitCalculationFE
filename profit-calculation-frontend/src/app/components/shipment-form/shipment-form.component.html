@@ -1,61 +1,33 @@
-<div class="shipment-top">
-  <div class="income-pane">
-    <label class="label">Income</label>
-    <input class="income-input" type="number" formControlName="referenceNumber" placeholder="Ref / Income note" />
-    <!-- we show an editable "income value" box for quick demo -->
-    <div class="income-value">
-      <input type="number" [value]="getTotalPayments()" readonly />
+<div class="shipment-form">
+  <div class="top-left">
+    <div class="app-title">
+      <div class="icon-circle"></div>
+      <div class="title-text">Calculate Profit</div>
+    </div>
+    <div class="shipment-id">
+      <strong>Shipment ID</strong> <span class="id-value">{{ form.get('reference')?.value }}</span>
+    </div>
+
+    <div class="income-block">
+      <label class="label">Income</label>
+      <input class="input" formControlName="income" type="number" step="0.01" />
     </div>
   </div>
 
-  <div class="costs-pane">
-    <div class="costs-box">
+  <div class="top-right">
+    <div class="costs-card">
       <div class="cost-row">
         <label>Cost</label>
-        <input type="number" [value]="getTotalCosts()" readonly />
+        <input type="number" formControlName="cost" />
       </div>
       <div class="cost-row">
         <label>Additional Cost</label>
-        <input type="number" value="0" readonly />
+        <input type="number" formControlName="additionalCost" />
       </div>
     </div>
-  </div>
 
-  <div class="action-pane">
-    <button class="btn-calc" (click)="onSubmit()">Calculate</button>
-  </div>
-</div>
-
-<!-- Reactive form fields below (customers / services) -->
-<form [formGroup]="form" class="details-form">
-  <div class="two-col">
-    <div class="col">
-      <h5>Customers</h5>
-      <div formArrayName="customers">
-        <div *ngFor="let c of customers.controls; let i = index" [formGroupName]="i" class="mini-row">
-          <input formControlName="name" placeholder="Name" />
-          <input formControlName="paymentAmount" type="number" placeholder="Payment" />
-        </div>
-      </div>
-      <button type="button" (click)="addCustomer()">+ Customer</button>
-    </div>
-
-    <div class="col">
-      <h5>Services / Costs</h5>
-      <div formArrayName="serviceProv">
-        <div *ngFor="let s of serviceProv.controls; let j = index" [formGroupName]="j" class="mini-row">
-          <input formControlName="name" placeholder="Service" />
-          <input formControlName="costAmount" type="number" placeholder="Cost" />
-        </div>
-      </div>
-      <button type="button" (click)="addServiceProvider()">+ Service</button>
+    <div class="calculate-button">
+      <button (click)="onCalculate()">Calculate</button>
     </div>
   </div>
-</form>
-
-<!-- results -->
-<div *ngIf="result" class="results">
-  <div><strong>Total Income:</strong> {{ getTotalPayments() | number:'1.2-2' }}</div>
-  <div><strong>Total Costs:</strong> {{ getTotalCosts() | number:'1.2-2' }}</div>
-  <div><strong>Profit or Loss:</strong> {{ getProfit() | number:'1.2-2' }}</div>
 </div>

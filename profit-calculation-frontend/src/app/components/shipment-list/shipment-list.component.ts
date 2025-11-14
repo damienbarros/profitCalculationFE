@@ -1,28 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService, ShipmentDto } from '../../services/api.service';
-import { Observable } from 'rxjs';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+
+export interface ProfitRow {
+  reference?: string;
+  income: number;
+  totalCosts: number;
+  profitOrLoss: number;
+}
 
 @Component({
   selector: 'app-shipment-list',
   templateUrl: './shipment-list.component.html',
-  styleUrls: ['./shipment-list.component.css']
+  styleUrls: ['./shipment-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShipmentListComponent implements OnInit {
-  shipments$: Observable<ShipmentDto[]>;
+export class ShipmentListComponent {
+  @Input() rows: ProfitRow[] = [];
 
-  constructor(private api: ApiService) {
-    this.shipments$ = this.api.shipments$;
-  }
-
-  ngOnInit(): void {}
-
-  getTotalPayments(s: ShipmentDto): number {
-    return (s.customers || []).reduce((a, c) => a + (c.paymentAmount || 0), 0);
-  }
-  getTotalCosts(s: ShipmentDto): number {
-    return (s.serviceProv || []).reduce((a, c) => a + (c.costAmount || 0), 0);
-  }
-  getProfit(s: ShipmentDto): number {
-    return this.getTotalPayments(s) - this.getTotalCosts(s);
+  trackByIndex(index: number) {
+    return index;
   }
 }

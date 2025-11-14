@@ -1,21 +1,49 @@
-.shipment-top { display:flex; gap:18px; align-items:flex-start; }
-.income-pane { flex: 1; }
-.income-pane .label { font-weight:600; display:block; margin-bottom:6px; }
-.income-input, .income-value input { width:180px; padding:6px; border:1px solid #999; }
+.shipment-form {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 18px 8px;
+  background: transparent;
+}
 
-.costs-pane { width: 360px; display:flex; align-items:center; justify-content:center; }
-.costs-box { border:2px solid #222; padding:12px; width:100%; background:#fff; }
-.cost-row { display:flex; justify-content:space-between; margin-bottom:8px; align-items:center; }
-.cost-row label { width:120px; }
+/* Left column (title, id, income) */
+.top-left {
+  flex: 1 1 60%;
+}
+.app-title {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:6px;
+}
+.icon-circle {
+  width:20px;height:20px;border-radius:50%;border:1px solid #bbb;background:#fafafa;
+}
+.title-text { font-size:1.05rem; }
+.shipment-id { margin:6px 0 12px; }
+.income-block { margin-top:8px; }
+.label { display:block; font-weight:600; margin-bottom:6px; }
+.input { width:160px; padding:8px; border:1px solid #ccc; border-radius:3px; }
 
-.action-pane { display:flex; align-items:center; margin-left:auto; }
-.btn-calc { background:#0b63d6; color:white; padding:10px 20px; border-radius:4px; border:none; cursor:pointer; }
+/* Right column (costs + button) */
+.top-right {
+  width:330px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:12px;
+}
+.costs-card {
+  border:2px solid #111;
+  padding:12px;
+  min-width:260px;
+  background:#fff;
+}
+.cost-row { display:flex; justify-content:space-between; gap:12px; margin-bottom:8px; align-items:center; }
+.cost-row label { width:120px; font-weight:600; }
+.cost-row input { width:100px; padding:6px; border:1px solid #ccc; border-radius:3px; }
 
-/* customers/services area */
-.details-form .two-col { display:flex; gap:18px; margin-top:14px; }
-.col { flex:1; }
-.mini-row { display:flex; gap:10px; margin-bottom:8px; }
-.mini-row input { flex:1; padding:6px; border:1px solid #ccc; }
-
-/* results */
-.results { margin-top:12px; border-top:1px dashed #ddd; padding-top:8px; }
+.calculate-button button {
+  background:#0b64e6; color:#fff; padding:10px 16px; border:none; border-radius:6px; cursor:pointer;
+}
+.calculate-button button:hover { opacity:0.95; }
