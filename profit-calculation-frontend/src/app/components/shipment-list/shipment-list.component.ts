@@ -1,28 +1,28 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ApiService, ShipmentDto } from '../../services/api.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-shipment-list',
-  templateUrl: './shipment-list.component.html'
+  templateUrl: './shipment-list.component.html',
+  styleUrls: ['./shipment-list.component.css']
 })
-export class ShipmentListComponent {
-  @Input() shipments: any[] = [];
+export class ShipmentListComponent implements OnInit {
+  shipments$: Observable<ShipmentDto[]>;
 
-  // Optional helper methods for use in template
-  getTotalPayments(shipment: any): number {
-    return shipment?.customers?.reduce(
-      (acc: number, c: any) => acc + (Number(c.paymentAmount) || 0),
-      0
-    ) || 0;
+  constructor(private api: ApiService) {
+    this.shipments$ = this.api.shipments$;
   }
 
-  getTotalCosts(shipment: any): number {
-    return shipment?.serviceProv?.reduce(
-      (acc: number, s: any) => acc + (Number(s.costAmount) || 0),
-      0
-    ) || 0;
-  }
+  ngOnInit(): void {}
 
-  getProfit(shipment: any): number {
-    return this.getTotalPayments(shipment) - this.getTotalCosts(shipment);
+  getTotalPayments(s: ShipmentDto): number {
+    return (s.customers || []).reduce((a, c) => a + (c.paymentAmount || 0), 0);
+  }
+  getTotalCosts(s: ShipmentDto): number {
+    return (s.serviceProv || []).reduce((a, c) => a + (c.costAmount || 0), 0);
+  }
+  getProfit(s: ShipmentDto): number {
+    return this.getTotalPayments(s) - this.getTotalCosts(s);
   }
 }

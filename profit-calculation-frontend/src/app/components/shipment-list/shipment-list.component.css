@@ -1,0 +1,3 @@
+.list-wrapper { padding: 8px; }
+.list-table { width: 100%; border-collapse: collapse; }
+.list-table th, .list-table td { border: 1px solid #999; padding: 8px; text-align:left; }

@@ -1,21 +1,17 @@
-<div class="container mt-4">
-  <h2>Shipment List</h2>
-
-  <table class="table table-striped mt-3">
+<div class="list-wrapper">
+  <table class="list-table">
     <thead>
       <tr>
-        <th>Reference #</th>
-        <th>Total Payments</th>
+        <th>Income</th>
         <th>Total Costs</th>
-        <th>Profit</th>
+        <th>Profit or Loss</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let s of shipments">
-        <td>{{ s.referenceNumber }}</td>
-        <td>{{ getTotalPayments(s) | number: '1.2-2' }}</td>
-        <td>{{ getTotalCosts(s) | number: '1.2-2' }}</td>
-        <td>{{ getProfit(s) | number: '1.2-2' }}</td>
+      <tr *ngFor="let s of (shipments$ | async)">
+        <td>{{ getTotalPayments(s) | number:'1.0-0' }}</td>
+        <td>{{ getTotalCosts(s) | number:'1.0-0' }}</td>
+        <td>{{ getProfit(s) | number:'1.0-0' }}</td>
       </tr>
     </tbody>
   </table>

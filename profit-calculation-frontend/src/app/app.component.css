@@ -1,0 +1,57 @@
+:root {
+  --sidebar-w: 170px;
+  --gutter: 18px;
+}
+
+.app-root {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* left nav */
+.sidebar {
+  width: var(--sidebar-w);
+  border-right: 2px solid #222;
+  display: flex;
+  align-items: flex-start;
+  padding: 20px 12px;
+  background: #fafafa;
+}
+.logo { display:flex; align-items:center; gap:10px; }
+.logo .coin { width:36px; height:36px; border-radius:50%; border:2px solid #333; display:flex; align-items:center; justify-content:center; }
+.logo .title { font-weight:600; font-size:14px; }
+
+/* main content */
+.main-area {
+  flex: 1;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* header */
+.page-header {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.shipment-id .label { font-weight:600; margin-right:8px; }
+.shipment-id .value { font-family: monospace; background:#fff; padding:4px 10px; border:1px solid #ccc; border-radius:3px; }
+
+/* form area container */
+.form-area {
+  border: 2px solid #999;
+  padding: 14px;
+  background: #fff;
+}
+
+/* list area */
+.list-area {
+  border: 2px solid #999;
+  padding: 8px;
+  background: #fff;
+  flex: 1;
+  overflow:auto;
+}

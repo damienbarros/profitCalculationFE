@@ -1,13 +1,28 @@
-<div class="app-shell d-flex">
-  <div class="left-panel p-4" style="width:220px;">
-    <h3>Calculate Profit</h3>
-    <nav class="nav flex-column mt-4">
-      <a routerLink="" class="nav-link text-white">Calculator</a>
-      <a routerLink="/shipments" class="nav-link text-white">Shipments</a>
-    </nav>
-  </div>
+<div class="app-root">
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="coin">⚪</div>
+      <div class="title">Calculate Profit</div>
+    </div>
+  </aside>
 
-  <div class="flex-fill content">
-    <router-outlet></router-outlet>
-  </div>
+  <main class="main-area">
+    <!-- Header with Shipment ID -->
+    <header class="page-header">
+      <div class="shipment-id">
+        <span class="label">Shipment ID</span>
+        <span class="value">0001</span>
+      </div>
+    </header>
+
+    <!-- Form area (top) -->
+    <section class="form-area">
+      <app-shipment-form></app-shipment-form>
+    </section>
+
+    <!-- Table area (bottom) -->
+    <section class="list-area">
+      <app-shipment-list></app-shipment-list>
+    </section>
+  </main>
 </div>

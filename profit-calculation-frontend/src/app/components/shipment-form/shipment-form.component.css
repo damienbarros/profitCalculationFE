@@ -1,1 +1,21 @@
-.card { background: #fff; border-radius: 6px; }
+.shipment-top { display:flex; gap:18px; align-items:flex-start; }
+.income-pane { flex: 1; }
+.income-pane .label { font-weight:600; display:block; margin-bottom:6px; }
+.income-input, .income-value input { width:180px; padding:6px; border:1px solid #999; }
+
+.costs-pane { width: 360px; display:flex; align-items:center; justify-content:center; }
+.costs-box { border:2px solid #222; padding:12px; width:100%; background:#fff; }
+.cost-row { display:flex; justify-content:space-between; margin-bottom:8px; align-items:center; }
+.cost-row label { width:120px; }
+
+.action-pane { display:flex; align-items:center; margin-left:auto; }
+.btn-calc { background:#0b63d6; color:white; padding:10px 20px; border-radius:4px; border:none; cursor:pointer; }
+
+/* customers/services area */
+.details-form .two-col { display:flex; gap:18px; margin-top:14px; }
+.col { flex:1; }
+.mini-row { display:flex; gap:10px; margin-bottom:8px; }
+.mini-row input { flex:1; padding:6px; border:1px solid #ccc; }
+
+/* results */
+.results { margin-top:12px; border-top:1px dashed #ddd; padding-top:8px; }
