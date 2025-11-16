@@ -19,11 +19,28 @@
 .icon-circle {
   width:20px;height:20px;border-radius:50%;border:1px solid #bbb;background:#fafafa;
 }
-.title-text { font-size:1.05rem; }
-.shipment-id { margin:6px 0 12px; }
-.income-block { margin-top:8px; }
-.label { display:block; font-weight:600; margin-bottom:6px; }
-.input { width:160px; padding:8px; border:1px solid #ccc; border-radius:3px; }
+.title-text { 
+  font-size:1.05rem; 
+}
+.shipment-id { 
+  margin:6px 0 12px; 
+}
+.income-block { 
+  /*margin-top:8px;*/
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.label { 
+  display:block; 
+  font-weight:600; 
+  /*margin-bottom:6px;*/ 
+}
+.input { width:160px; 
+  padding:8px; 
+  border:1px solid #ccc; 
+  border-radius:3px; 
+}
 
 /* Right column (costs + button) */
 .top-right {

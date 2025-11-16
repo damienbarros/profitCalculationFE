@@ -1,4 +1,4 @@
-<div class="shipment-form">
+<form [formGroup]="form" class="shipment-form">
   <div class="top-left">
     <div class="app-title">
       <!--<div class="icon-circle"></div>-->
@@ -14,7 +14,8 @@
     </div>
   </div>
 
-  <div class="top-right">
+  <div class="income-block">
+
     <div class="costs-card">
       <div class="cost-row">
         <label>Cost</label>
@@ -30,4 +31,4 @@
       <button (click)="onCalculate()">Calculate</button>
     </div>
   </div>
-</div>
+</form>
