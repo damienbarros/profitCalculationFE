@@ -1,9 +1,22 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
 /* small app styles */
+/*
 body {
   padding: 12px;
   background: #f7f7f9;
+}
+*/
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+app-root {
+  display: block;
+  height: 100%;
 }
 
 .app-shell {

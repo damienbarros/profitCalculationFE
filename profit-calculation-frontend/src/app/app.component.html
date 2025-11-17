@@ -17,12 +17,12 @@
 
     <!-- Form area (top) -->
     <section class="form-area">
-      <app-shipment-form></app-shipment-form>
+      <app-shipment-form (addRow)="onAddRow($event)"></app-shipment-form>
     </section>
 
     <!-- Table area (bottom) -->
     <section class="list-area">
-      <app-shipment-list></app-shipment-list>
+      <app-shipment-list [rows]="rows"></app-shipment-list>
     </section>
   </main>
 </div>

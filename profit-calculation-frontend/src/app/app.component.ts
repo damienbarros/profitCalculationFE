@@ -3,10 +3,8 @@ import { ProfitRow } from './components/shipment-list/shipment-list.component';
 
 @Component({
   selector: 'app-root',
-  template: `
-    <app-shipment-form (addRow)="onAddRow($event)"></app-shipment-form>
-    <app-shipment-list [rows]="rows"></app-shipment-list>
-  `
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   rows: ProfitRow[] = [
