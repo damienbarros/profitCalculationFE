@@ -12,7 +12,7 @@ export interface ServiceProvision {
 
 export interface Shipment {
   id?: number;
-  referenceNumber?: string;
+  shipmentNumber?: string;
   profitOrLoss?: number;
   customers?: Customer[];
   serviceProv?: ServiceProvision[];
