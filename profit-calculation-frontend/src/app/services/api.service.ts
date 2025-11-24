@@ -13,7 +13,7 @@ export interface ShipmentDto {
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  private _store = new BehaviorSubject<ShipmentDto[]>([
+  private store = new BehaviorSubject<ShipmentDto[]>([
     // seed example rows shown in wireframe
     {
       id: 1,
@@ -30,11 +30,11 @@ export class ApiService {
   ]);
 
   get shipments$(): Observable<ShipmentDto[]> {
-    return this._store.asObservable();
+    return this.store.asObservable();
   }
 
   saveShipment(s: ShipmentDto) {
-    const list = this._store.getValue();
+    const list = this.store.getValue();
     const nextId = list.length ? Math.max(...list.map(x => x.id || 0)) + 1 : 1;
     s.id = s.id ?? nextId;
     // compute profit
@@ -42,6 +42,6 @@ export class ApiService {
     const costs = (s.serviceProv || []).reduce((a, c) => a + (c.costAmount || 0), 0);
     s.profitOrLoss = +(income - costs).toFixed(2);
 
-    this._store.next([s, ...list]);
+    this.store.next([s, ...list]);
   }
 }
