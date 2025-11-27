@@ -19,9 +19,12 @@ export class ShipmentFormComponent implements OnInit {
   @Output() addRow = new EventEmitter<ProfitRow>();
 
   form!: FormGroup;
-  ProfitService: any;
 
-  constructor(private fb: FormBuilder) {}
+
+  constructor(
+    private fb: FormBuilder,
+    private profitService: ProfitService
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -61,7 +64,7 @@ export class ShipmentFormComponent implements OnInit {
 
     this.addRow.emit({reference, income, totalCosts, profitOrLoss});
 
-    this.ProfitService.updateProfit(reference, profitOrLoss).subscribe({
+    this.profitService.updateProfit(reference, profitOrLoss).subscribe({
       next: () => console.log("Shipment updated in DB"),
       error: (err: any) => console.error("Error updating profit", err)
     });

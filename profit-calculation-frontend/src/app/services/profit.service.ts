@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 
 @Injectable({ providedIn: 'root' })
 export class ProfitService {
-  private apiUrl = 'http://localhost:8080/api/system/shipments';
+  private apiUrl = 'http://localhost:8085/api/system/shipments';
 
   constructor(private http: HttpClient) {}
 
