@@ -9,12 +9,12 @@ import { ProfitRow } from './components/shipment-list/shipment-list.component';
 export class AppComponent {
   rows: ProfitRow[] = [
     // example existing rows (if you want them pre-filled)
-    // { reference: 'shipment1', income: 1000, totalCosts: 200, profitOrLoss: 800 },
-    // { reference: 'shipment2', income: 500, totalCosts: 900, profitOrLoss: -400 }
+    // { reference: '1', income: 1000, totalCosts: 200, profitOrLoss: 800 },
+    // { reference: '2', income: 500, totalCosts: 900, profitOrLoss: -400 }
   ];
 
   onAddRow(row: ProfitRow) {
-    // push to list (or do a replace/unique logic)
+    // push to list
     this.rows = [...this.rows, row];
   }
 }

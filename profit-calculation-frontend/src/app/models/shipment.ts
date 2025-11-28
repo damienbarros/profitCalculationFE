@@ -15,5 +15,5 @@ export interface Shipment {
   shipmentNumber?: string;
   profitOrLoss?: number;
   customers?: Customer[];
-  serviceProv?: ServiceProvision[];
+  serviceProv?: ServiceProvision[]; 
 }

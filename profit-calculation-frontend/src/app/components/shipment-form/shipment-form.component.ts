@@ -28,7 +28,7 @@ export class ShipmentFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      reference: ['0001'],
+      reference: [1],
       income: [0, [Validators.required, Validators.min(0)]],
       cost: [0, [Validators.required, Validators.min(0)]],
       additionalCost: [0, [Validators.required, Validators.min(0)]]
